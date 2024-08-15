@@ -1,0 +1,249 @@
+@font-face {
+  font-family: DejaVu Sans Mono;
+  src: url(./fonts/DejaVuSansMono.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: UASQUARE;
+  src: url(./fonts/UASQUARE.ttf) format('truetype');
+}
+
+:root {
+  --background1: #111a24;
+  --background1Transparent: rgba(17, 26, 36, 0.75);
+  --accent: #017f9e;
+  --white: #ffffff;
+  --whiteTransparent: rgba(255, 255, 255, 0.1);
+  --yellow: #ffff00;
+  --postMortemAccent: #ffff00;
+  --margin: 0;
+  --padding: 0;
+  --box-sizing: border-box;
+  --scrollbar-width: thin;
+  --scrollbar-foreground: var(--white);
+  --scrollbar-background: var(--background1);
+  --selection-color: var(--white);
+  --selection-background: var(--accent);
+}
+
+* {
+  margin: var(--margin);
+  padding: var(--padding);
+  box-sizing: var(--box-sizing);
+}
+
+* {
+  scrollbar-width: var(--scrollbar-width);
+  scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
+}
+
+::selection {
+  color: var(--selection-color);
+  background-color: var(--selection-background);
+}
+
+html {
+  background: var(--background1);
+  color: var(--white);
+  overflow: hidden;
+  font-family: 'DejaVu Sans Mono', monospace;
+  font-size: small;
+}
+
+canvas {
+  display: block;
+}
+
+li {
+  list-style: none;
+}
+
+.scanlines:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  touch-action: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 0.5px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+.main-container {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 5% 80% 15%;
+  grid-template-columns: 15% 85%;
+  grid-template-areas:
+    'stats stats'
+    'messages canvas'
+    'bottom bottom';
+}
+
+.canvas-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: canvas;
+  /*   border: solid var(--white) 1px; */
+}
+
+.stats-container {
+  grid-area: stats;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.messages-container {
+  grid-area: messages;
+  display: flex;
+}
+
+.bottom-container {
+  grid-area: bottom;
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-container {
+  display: flex;
+  width: 15%;
+}
+
+.hud-image {
+  max-width: 100%;
+  max-height: auto;
+  object-fit: contain;
+}
+
+.buffs-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  width: 20%;
+}
+
+.equipment-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  width: 60%;
+}
+
+.options-container {
+  display: flex;
+  height: 100%;
+  width: min-content;
+}
+
+.log-screen,
+.inventory-screen,
+.equipment-screen,
+.gameover-screen {
+  background: var(--background1Transparent);
+  backdrop-filter: blur(5px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2rem;
+}
+
+.gameover-screen {
+  font-family: 'UASQUARE';
+  font-size: large;
+}
+
+.log-screen h1,
+.inventory-screen h1,
+.equipment-screen h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.gameover-screen h1 {
+  text-align: center;
+}
+
+.log-screen ul li:nth-child(odd) {
+  background-color: var(--whiteTransparent);
+}
+
+.gameover-info {
+  text-align: center;
+  font-size: 2em;
+}
+
+.gameover-info span {
+  color: var(--accent);
+}
+
+.post-mortem-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 1em;
+}
+
+.post-mortem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 70ch;
+  padding: 1em;
+  margin: auto;
+  line-height: 1.75;
+  font-size: 1.25em;
+}
+
+.post-mortem h2 {
+  margin: 1em 0;
+}
+
+.post-mortem li span {
+  color: var(--postMortemAccent);
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 100ms;
+}
+
+.fade-out {
+  animation: fadeOut 100ms;
+}
