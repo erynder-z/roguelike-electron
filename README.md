@@ -4,12 +4,12 @@ This is the electron version of [_Roguelike_](https://github.com/erynder-z/rogue
 
 ### Start the App:
 
-`npm start`
+`npm run start`
 
 ### Building a binary
 
-`npm package`
+`npm run package`
 
 ### Create an installer
 
-`npm make`
+`npm run make`
