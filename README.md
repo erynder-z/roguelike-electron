@@ -6,10 +6,10 @@ This is the electron version of [_Roguelike_](https://github.com/erynder-z/rogue
 
 `npm start`
 
-### Building the App
-
-`npm build`
-
-### Create Binary
+### Building a binary
 
 `npm package`
+
+### Create an installer
+
+`npm make`
