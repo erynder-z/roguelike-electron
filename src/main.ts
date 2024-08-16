@@ -9,8 +9,9 @@ if (require('electron-squirrel-startup')) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1920,
-    height: 1080,
+    fullscreen: true,
+    show: false,
+    backgroundColor: '#170a20',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -25,7 +26,11 @@ const createWindow = () => {
     );
   }
 
-  mainWindow.maximize();
+  // Show the window once it is ready to be displayed
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.focus();
+    mainWindow.show();
+  });
 };
 
 // This method will be called when Electron has finished
@@ -49,6 +54,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
